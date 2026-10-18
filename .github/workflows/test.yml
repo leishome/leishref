@@ -50,6 +50,9 @@ jobs:
       - name: Test with pytest
         run: poetry run pytest --cov=leishref --cov-report=xml --cov-report=term-missing
 
+      - name: Test the website scripts
+        run: node --test "leishref-web/tests/*.test.mjs"
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
