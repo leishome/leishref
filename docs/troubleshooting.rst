@@ -155,7 +155,7 @@ The catalog's directory layout (``ncbi/``, ``scaffolds/``, ``custom/``,
 whether it happens to have a Zenodo DOI or a particular file layout. A ``source:
 Custom`` entry stays under ``custom/`` even after being published to Zenodo. If
 you're scripting catalog changes, group by ``source`` and leave placement alone
-otherwise — see :doc:`catalog` and the repository's ``CLAUDE.md`` for the full rule.
+otherwise — see :doc:`catalog` for the full rule.
 
 Symlinks have the wrong extension
 ----------------------------------------
