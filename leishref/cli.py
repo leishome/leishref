@@ -47,7 +47,7 @@ from leishref.metadata import (  # noqa: F401  (cache_key is re-exported)
     write_genome,
 )
 from leishref.naming import suggest_alias
-from leishref.ncbi import fetch_fasta_gff, fetch_metadata, species_from_organism
+from leishref.ncbi import NCBIError, fetch_fasta_gff, fetch_metadata, species_from_organism
 from leishref.nuccore import NuccoreError, fetch_nucleotide_fasta, fetch_nucleotide_metadata
 from leishref.prune import prune_fasta
 from leishref.scaffold import clean_scaffolded_fasta, ragtag_version, run_scaffold
@@ -498,7 +498,10 @@ def _fetch_genome_files(genome: Genome, name: str, tmp: Path) -> tuple[list, str
             return [], str(exc)
         return [fasta], ""
     if accession:
-        fasta, gff = fetch_fasta_gff(accession, tmp)
+        try:
+            fasta, gff = fetch_fasta_gff(accession, tmp)
+        except NCBIError as exc:
+            return [], str(exc)
         if not fasta:
             return [], f"NCBI has no data for {accession}"
         return [p for p in (fasta, gff) if p], ""
@@ -767,7 +770,11 @@ def install(name, alias, local_dir, force, no_link, hard_copy):
                 raise SystemExit(1)
         elif accession:
             click.echo(f"{name} -> {accession} (NCBI)")
-            fasta, gff = fetch_fasta_gff(accession, tmp)
+            try:
+                fasta, gff = fetch_fasta_gff(accession, tmp)
+            except NCBIError as exc:
+                click.echo(str(exc), err=True)
+                raise SystemExit(1)
             if not fasta:
                 click.echo(f"NCBI has no data for {accession}", err=True)
                 raise SystemExit(1)
@@ -2150,7 +2157,11 @@ def fetch_genome(accession, alias, species, strain, molecule_type, catalog_dir, 
 
     click.echo(f"Fetching {accession} from NCBI...")
     with tempfile.TemporaryDirectory() as tmp:
-        fasta, gff = fetch_fasta_gff(accession, Path(tmp))
+        try:
+            fasta, gff = fetch_fasta_gff(accession, Path(tmp))
+        except NCBIError as exc:
+            click.echo(str(exc), err=True)
+            raise SystemExit(1)
         if not fasta:
             click.echo(f"Not found on NCBI: {accession}", err=True)
             raise SystemExit(1)
