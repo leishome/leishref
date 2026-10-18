@@ -65,7 +65,8 @@ Tests that would otherwise hit the network (NCBI, Zenodo) mock the relevant
 function with ``monkeypatch`` rather than making real requests — see
 ``test_install_many_parallel_installs_all_genomes`` in ``tests/test_cli.py`` for
 the pattern. Keep new tests network-free the same way, so the suite stays fast and
-doesn't flake on connectivity.
+doesn't flake on connectivity: ``tests/conftest.py`` makes any test that opens a network
+connection, or runs ``datasets`` or ``curl``, fail immediately with the address it tried.
 
 The scripts of the website (``leishref-web/``) have their own tests, run with Node's built-in test runner
 (Node 20 or later, nothing to install)::
