@@ -321,6 +321,45 @@ Options:
 - ``--force`` — Replace an existing catalog entry
 - ``--no-link`` — Skip the alias-named symlink
 
+leishref dev import-tritrypdb
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Write the catalog entries of a TriTrypDB release that has been deposited on Zenodo::
+
+    leishref dev import-tritrypdb upload/ --release 71 --doi 10.5281/zenodo.23377097 \
+        --downloaded 2026-10-14 --gff LdonovaniBHU1220=LdonovaniBHU1220.liftoff-HU3.gff
+
+TriTrypDB needs a login to download from, so a release is brought in by hand:
+
+1. Download the genome FASTA and GFF files of the organisms to include from
+   `tritrypdb.org <https://tritrypdb.org>`_ into one directory. Keep TriTrypDB's own file names
+   (``TriTrypDB-<release>_<name>_Genome.fasta``, ``TriTrypDB-<release>_<name>.gff``).
+2. Deposit the directory as **one** Zenodo record, with a ``zenodo_metadata.json`` next to the files::
+
+       ZENODO_TOKEN=... python scripts/zenodo_upload_dir.py upload/
+
+   The script uploads with retries, resumes with ``--deposition ID`` (files already there are skipped by
+   checksum), and leaves a draft unless ``--publish`` is given. Use ``--sandbox`` to rehearse.
+3. Run ``import-tritrypdb`` on the same directory with the record's DOI.
+
+One entry per genome is written to ``leishref/data/tritrypdb/<release>/`` (``source: TriTrypDB``),
+measured from the files: checksums, assembly statistics, species and strain from the FASTA header, taxon id
+from ``species_taxon_mapping.yaml``. All entries point at the one Zenodo record, and ``leishref install``
+downloads only the files of the entry it was asked for, not the whole release.
+
+Options:
+
+- ``--release INT`` — TriTrypDB release number (required)
+- ``--doi TEXT`` — DOI of the Zenodo record that holds the files (required)
+- ``--downloaded DATE`` — When the files were downloaded from TriTrypDB, ``YYYY-MM-DD`` (required)
+- ``--gff NAME=FILE`` — Use ``FILE`` as the GFF of genome ``NAME`` when it is not TriTrypDB's own, e.g. one
+  lifted from another assembly with Liftoff for a genome TriTrypDB ships without annotation. The entry then
+  records where the annotation came from. Repeatable.
+- ``--catalog-dir PATH`` — Write into another catalog root
+- ``--dry-run`` — List the entries without writing them
+
+A genome without a GFF in the directory gets an entry with the FASTA only.
+
 leishref dev add
 ~~~~~~~~~~~~~~~~
 
