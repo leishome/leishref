@@ -68,6 +68,19 @@ the pattern. Keep new tests network-free the same way, so the suite stays fast a
 doesn't flake on connectivity: ``tests/conftest.py`` makes any test that opens a network
 connection, or runs ``datasets`` or ``curl``, fail immediately with the address it tried.
 
+The scripts of the website (``leishref-web/``) have their own tests, run with Node's built-in test runner
+(Node 20 or later, nothing to install)::
+
+    node --test "leishref-web/tests/*.test.mjs"
+
+The page logic that doesn't touch the DOM lives in ``leishref-web/catalog-lib.js`` (and ``summarize`` in
+``about.js``) so that it can be tested this way; the page itself is still checked in a browser. A new script
+that the pages load must also be added to the ``cp`` line of ``.github/workflows/site.yml``, or it won't be
+published.
+
+Plots need ``matplotlib`` and ``seaborn``, which are regular dependencies. The one test that scaffolds with
+``ragtag.py`` is skipped where ``ragtag.py`` isn't installed.
+
 Maintainer commands
 -------------------
 
@@ -76,6 +89,13 @@ Add NCBI genome assembly to catalog::
     leishref dev fetch-genome GCA_000227135.2
 
 Downloads metadata and FASTA/GFF from NCBI, creates ``leishref/data/ncbi/GCA_000227135.2/metadata.yaml``.
+
+Add a TriTrypDB release (already deposited on Zenodo) to catalog::
+
+    leishref dev import-tritrypdb upload/ --release 71 --doi 10.5281/zenodo.23377097 --downloaded 2026-10-14
+
+Writes one entry per genome to ``leishref/data/tritrypdb/<release>/``; see :doc:`commands` for the whole
+download, deposit and import sequence.
 
 Stage a local assembly for review::
 

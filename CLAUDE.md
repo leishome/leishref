@@ -115,14 +115,17 @@ https://leishome.github.io/, repo leishome/leishome.github.io).
   into `_site/`: a new file in `leishref-web/` must also be added to the `cp` line there.
 - The header links to the Leishome org page and the About page only (no Leishgene button; the About page links to it
   in the text).
-- No JS test setup here: check page changes in a browser. The sibling project
+- JS tests: `node --test "leishref-web/tests/*.test.mjs"` (Node's built-in runner, run in CI). Pure page logic lives in
+  `catalog-lib.js` (and `summarize` in `about.js`); `catalog-lib.js` must be in the `cp` line of `site.yml`, which it is.
+  The DOM code itself is still checked in a browser. The sibling project
   [leishgene](https://github.com/leishome/leishgene) (https://leishome.github.io/leishgene/) searches the genes of
   the entries that record a GFF; keep `files.gff` accurate because Leishgene indexes exactly those.
 
 ## Notes for CI
 
-- `test.yml` lints with flake8 and has been failing on `main` because of existing warnings in `tests/` (unused
-  variables and imports); it runs on pushes to `main`/`develop` and on pull requests to them.
+- `test.yml` runs black, isort, flake8, pytest and the website's `node --test` on pushes to `main`/`develop` and on
+  pull requests to them; keep it green (lint is clean as of release 71). CI has no `ragtag.py`, so that one test
+  skips; matplotlib and seaborn are regular dependencies.
 - `ncbi.fetch_fasta_gff` returns `(None, None)` only when NCBI has no such accession; any other `datasets` failure
   (network, outage, missing binary) raises `NCBIError` carrying what `datasets` said, and `install`, `restore` and
   `dev fetch-genome` show it. CI jobs that call `leishref install` need the NCBI `datasets` binary on the PATH and
