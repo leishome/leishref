@@ -2710,7 +2710,7 @@ def publish(name, local_dir, catalog_dir, version, confirm, sandbox):
         genome.provenance["zenodo_notes"] = notes
     # A Custom entry stays Custom - and so in leishref/data/custom/ - even once
     # published; only entries that started life some other way (scaffolds) flip to
-    # Zenodo. See CLAUDE.md's catalog placement rule.
+    # Zenodo. See docs/catalog.rst for the placement rule.
     if genome.source != "Custom":
         genome.source = "Zenodo"
     if version:
