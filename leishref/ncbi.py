@@ -12,8 +12,25 @@ class NCBIError(Exception):
     pass
 
 
+#: What `datasets` says (in lowercase) when the accession itself doesn't exist, as opposed to
+#: the download failing for some other reason.
+NOT_FOUND = ("not found", "no genome assemblies that match")
+
+
+def _datasets_message(stderr: str) -> str:
+    """The error `datasets` reported, without its 'new version available' notice."""
+    lines = [line.strip() for line in (stderr or "").splitlines() if line.strip()]
+    lines = [line for line in lines if not line.startswith("New version of client")]
+    return " ".join(lines) or "no message"
+
+
 def fetch_fasta_gff(accession: str, outdir: Path) -> tuple[Optional[Path], Optional[Path]]:
-    """Download fasta+gff from NCBI via datasets CLI. Returns (fasta_path, gff_path) or (None, None)."""
+    """Download fasta+gff from NCBI via datasets CLI.
+
+    Returns (fasta_path, gff_path), or (None, None) when NCBI has no such accession. Any
+    other failure (network, rate limit, an NCBI outage, `datasets` missing) raises NCBIError
+    with what `datasets` actually said, so it isn't mistaken for a missing genome.
+    """
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
@@ -31,11 +48,14 @@ def fetch_fasta_gff(accession: str, outdir: Path) -> tuple[Optional[Path], Optio
                 "--filename",
                 str(tmpdir / "dataset.zip"),
             ]
-            result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+            try:
+                result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+            except FileNotFoundError:
+                raise NCBIError("the NCBI 'datasets' command is not installed or not on the PATH")
             if result.returncode != 0:
-                if "not found" in result.stderr or "error" in result.stderr.lower():
+                if any(phrase in result.stderr.lower() for phrase in NOT_FOUND):
                     return None, None
-                raise NCBIError(f"datasets download failed: {result.stderr}")
+                raise NCBIError(f"datasets download of {accession} failed: {_datasets_message(result.stderr)}")
 
             zippath = tmpdir / "dataset.zip"
             if not zippath.exists():

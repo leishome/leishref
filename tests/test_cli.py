@@ -1842,3 +1842,19 @@ def test_install_places_a_tritrypdb_genome_under_its_release(tmp_path):
     target = _install(genome, [fasta], tmp_path / "data")
     assert target == tmp_path / "data" / "tritrypdb" / "71" / "TriTrypDB-71_A"
     assert (target / "TriTrypDB-71_A_Genome.fasta").exists()
+
+
+def test_a_failed_ncbi_download_is_reported_as_the_error_not_as_a_missing_genome(monkeypatch, tmp_path):
+    """install and restore used to say 'NCBI has no data' for any failure of `datasets`."""
+    from leishref.cli import _fetch_genome_files
+    from leishref.ncbi import NCBIError
+
+    def outage(accession, outdir):
+        raise NCBIError("datasets download of GCA_1.1 failed: Error: 503 Service Unavailable")
+
+    monkeypatch.setattr("leishref.cli.fetch_fasta_gff", outage)
+    genome = Genome(identifier="GCA_1.1", accession="GCA_1.1", source="NCBI")
+    written, error = _fetch_genome_files(genome, "GCA_1.1", tmp_path)
+    assert written == []
+    assert "503 Service Unavailable" in error
+    assert "has no data" not in error

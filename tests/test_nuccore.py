@@ -78,9 +78,12 @@ def test_fetch_nucleotide_metadata_returns_empty_dict_when_not_found(monkeypatch
     assert fetch_nucleotide_metadata("nonexistent") == {}
 
 
-def test_client_suppresses_bioservices_missing_email_warning(caplog):
+def test_client_suppresses_bioservices_missing_email_warning(caplog, monkeypatch):
     """EUtils() logs a rate-limit notice whenever no email is configured; we mute it."""
     from leishref.nuccore import _client
+
+    # bioservices probes the service's URL when a client is built; keep that offline.
+    monkeypatch.setattr("bioservices.services.urlopen", lambda *args, **kwargs: None)
 
     with caplog.at_level(logging.WARNING, logger="bioservices.EUtils"):
         _client()
