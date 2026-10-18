@@ -42,6 +42,11 @@ accession) prints ``NCBI has no data for <accession>`` rather than a stack trace
 double-check the accession against `NCBI Datasets
 <https://www.ncbi.nlm.nih.gov/datasets/>`_ if you see this.
 
+Any other failure of ``datasets`` (a network problem, rate limiting, an NCBI outage, or the
+command not being installed) is reported with what ``datasets`` itself said, for example
+``datasets download of GCA_000002725.2 failed: Error: 503 Service Unavailable``, so it is not
+mistaken for a missing genome. Retry later in that case.
+
 ``NCBI nuccore has no data for <accession>``
 --------------------------------------------------
 

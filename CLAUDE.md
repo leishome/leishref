@@ -123,9 +123,12 @@ https://leishome.github.io/, repo leishome/leishome.github.io).
 
 - `test.yml` lints with flake8 and has been failing on `main` because of existing warnings in `tests/` (unused
   variables and imports); it runs on pushes to `main`/`develop` and on pull requests to them.
-- `ncbi.fetch_fasta_gff` returns `(None, None)` whenever `datasets` prints "error" or "not found", so an NCBI outage
-  shows up as "NCBI has no data for X". CI jobs that call `leishref install` need the NCBI `datasets` binary on the
-  PATH and should retry.
+- `ncbi.fetch_fasta_gff` returns `(None, None)` only when NCBI has no such accession; any other `datasets` failure
+  (network, outage, missing binary) raises `NCBIError` carrying what `datasets` said, and `install`, `restore` and
+  `dev fetch-genome` show it. CI jobs that call `leishref install` need the NCBI `datasets` binary on the PATH and
+  should retry.
+- `tests/conftest.py` fails any test that opens a network connection or runs `datasets`/`curl`, so a test that forgets
+  to mock NCBI or Zenodo fails at once instead of depending on connectivity.
 
 ## Default code style & workflow
 
