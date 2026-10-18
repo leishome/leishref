@@ -1,26 +1,8 @@
+import { catalogStats, classifyTech, esc, hay, installCmd, kb, mb } from "./catalog-lib.js";
+
 const $ = (s) => document.querySelector(s);
-const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-const mb = (b) => (b ? (b / 1e6).toFixed(1) + " Mb" : "–");
-const kb = (b) => (b ? (b >= 1e6 ? (b / 1e6).toFixed(2) + " Mb" : (b / 1e3).toFixed(0) + " kb") : "–");
 
 let genomes = [], limit = 24;
-
-function classifyTech(s) {
-  if (!s) return "Unknown";
-  const t = s.toLowerCase();
-  const f = [/illumina|hiseq|miseq|novaseq|nextseq|gaiix?/, /nanopore|minion|gridion|promethion/, /pacbio|rs ?ii|sequel/, /454|ion ?torrent|solid/].map((r) => r.test(t));
-  if (f.filter(Boolean).length > 1) return "Hybrid";
-  return f[0] ? "Illumina" : f[1] ? "Oxford Nanopore" : f[2] ? "PacBio" : f[3] ? "Legacy (454/Ion/SOLiD)" : "Other";
-}
-
-const hay = (g) =>
-  [g.identifier, g.accession, g.species, g.strain, g.source, g.assembly_level, g.taxon_id, g.notes, g.tech, g.techCat, ...(g.aliases || [])]
-    .join(" ").toLowerCase();
-
-function installCmd(g) {
-  const alias = (g.aliases || [])[0];
-  return `leishref install ${g.identifier}` + (alias ? ` --alias ${alias}` : "");
-}
 
 function details(g) {
   const rows = [];
@@ -104,16 +86,10 @@ function fill(sel, vals) {
 }
 
 function stats() {
-  const species = new Set(genomes.map((g) => g.species).filter(Boolean));
-  const complete = genomes.filter((g) => ["Complete Genome", "Chromosome"].includes(g.assembly_level)).length;
-  // The same genome can be in the catalog under several origins (e.g. NCBI and TriTrypDB), so the
-  // last tile splits the entries by origin.
-  const n = (group) => genomes.filter((g) => g.group === group).length;
-  const split = [["NCBI", n("ncbi")], ["TriTrypDB", n("tritrypdb")]];
-  split.push(["others", genomes.length - split[0][1] - split[1][1]]);
-  const tiles = [[genomes.length, "genomes"], [species.size, "species"], [complete, "chromosome-level"]]
+  const st = catalogStats(genomes);
+  const tiles = [[st.genomes, "genomes"], [st.species, "species"], [st.chromosomeLevel, "chromosome-level"]]
     .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`);
-  tiles.push(`<div class="tile origins">${split.map(([l, v]) => `<div><b>${v}</b><span>${l}</span></div>`).join("")}</div>`);
+  tiles.push(`<div class="tile origins">${st.origins.map(([l, v]) => `<div><b>${v}</b><span>${l}</span></div>`).join("")}</div>`);
   $("#tiles").innerHTML = tiles.join("");
 }
 
