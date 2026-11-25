@@ -47,13 +47,7 @@ from leishref.metadata import (  # noqa: F401  (cache_key is re-exported)
     write_genome,
 )
 from leishref.naming import suggest_alias
-from leishref.ncbi import (
-    NCBIError,
-    country_from_geo_loc_name,
-    fetch_fasta_gff,
-    fetch_metadata,
-    species_from_organism,
-)
+from leishref.ncbi import NCBIError, country_from_geo_loc_name, fetch_fasta_gff, fetch_metadata, species_from_organism
 from leishref.nuccore import NuccoreError, fetch_nucleotide_fasta, fetch_nucleotide_metadata
 from leishref.prune import prune_fasta
 from leishref.scaffold import clean_scaffolded_fasta, ragtag_version, run_scaffold
