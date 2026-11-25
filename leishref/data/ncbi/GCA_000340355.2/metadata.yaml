@@ -4,6 +4,8 @@ accession: GCA_000340355.2
 taxon_id: 1295825
 species: Leishmania braziliensis
 strain: MHOM/BR/75/M2903
+country: Brazil
+geo_loc_name: 'Brazil: Serra dos Carajas, Para State'
 assembly_name: Leishmania_braziliensis_M2903-1.0.6
 assembly_level: Chromosome
 release_date: '2016-09-30'

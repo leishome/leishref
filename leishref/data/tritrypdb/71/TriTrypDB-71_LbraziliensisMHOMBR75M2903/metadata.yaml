@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5660
 species: Leishmania braziliensis
 strain: MHOM/BR/75/M2903
+country: Brazil
 assembly_level: Chromosome
 release_date: '2016-09-30'
 files:

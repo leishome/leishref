@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5659
 species: Leishmania amazonensis
 strain: MHOM/BR/71973/M2269
+country: Brazil
 assembly_level: Scaffold
 release_date: '2018-12-06'
 files:

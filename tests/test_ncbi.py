@@ -66,3 +66,43 @@ def test_a_missing_datasets_command_says_so(tmp_path, monkeypatch):
 def test_a_clean_exit_without_a_zip_gives_none(tmp_path, monkeypatch):
     monkeypatch.setattr(subprocess, "run", fake_run())
     assert fetch_fasta_gff("GCA_1.1", tmp_path) == (None, None)
+
+
+@pytest.mark.parametrize(
+    "geo_loc_name, country",
+    [
+        ("Brazil: Para state", "Brazil"),
+        ("Canada:Montreal", "Canada"),
+        ("Colombia", "Colombia"),
+        ("missing", None),
+        ("not applicable", None),
+        ("", None),
+        (None, None),
+    ],
+)
+def test_country_from_geo_loc_name(geo_loc_name, country):
+    from leishref.ncbi import country_from_geo_loc_name
+
+    assert country_from_geo_loc_name(geo_loc_name) == country
+
+
+def test_parse_summary_keeps_biosample_location_only_when_real():
+    from leishref.ncbi import _parse_summary
+
+    def record(value):
+        biosample = {"accession": "SAMN1", "attributes": [{"name": "geo_loc_name", "value": value}]}
+        return {"assembly_info": {"biosample": biosample}}
+
+    assert _parse_summary(record("Italy: Sicily"))["geo_loc_name"] == "Italy: Sicily"
+    assert _parse_summary(record("missing"))["geo_loc_name"] is None
+    assert _parse_summary({"assembly_info": {}})["geo_loc_name"] is None
+
+
+def test_genome_country_roundtrips_and_is_searchable():
+    from leishref.metadata import Genome
+
+    genome = Genome(identifier="x", country="Italy", geo_loc_name="Italy: Sicily")
+    again = Genome.from_dict(genome.to_dict())
+    assert (again.country, again.geo_loc_name) == ("Italy", "Italy: Sicily")
+    assert genome.matches(["sicily"]) and genome.matches(["italy"])
+    assert "country" not in Genome(identifier="y").to_dict()

@@ -4,6 +4,8 @@ accession: GCA_030937385.1
 taxon_id: 5659
 species: Leishmania amazonensis
 strain: LV79
+country: Brazil
+geo_loc_name: Brazil
 assembly_name: OSU_LamaLV79
 assembly_level: Chromosome
 release_date: '2023-08-29'

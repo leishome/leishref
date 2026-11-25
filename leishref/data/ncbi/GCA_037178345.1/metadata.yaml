@@ -4,6 +4,8 @@ accession: GCA_037178345.1
 taxon_id: 5671
 species: Leishmania infantum
 strain: LCAN/ES/1992/CATB011
+country: Spain
+geo_loc_name: 'Spain: Catalunya'
 assembly_name: ASM3717834v1
 assembly_level: Contig
 release_date: '2024-03-15'

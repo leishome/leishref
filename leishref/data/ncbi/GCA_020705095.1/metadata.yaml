@@ -4,6 +4,8 @@ accession: GCA_020705095.1
 taxon_id: 5671
 species: Leishmania infantum
 strain: CRENAL1265
+country: Italy
+geo_loc_name: 'Italy: Sicily'
 assembly_name: ASM2070509v1
 assembly_level: Scaffold
 release_date: '2021-11-01'

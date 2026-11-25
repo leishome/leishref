@@ -4,6 +4,8 @@ accession: GCA_055690235.1
 taxon_id: 5681
 species: Leishmania peruviana
 strain: Lsh3394
+country: Peru
+geo_loc_name: Peru:Cusco
 assembly_name: ASM5569023v1
 assembly_level: Scaffold
 release_date: '2026-03-05'

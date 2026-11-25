@@ -4,6 +4,8 @@ accession: GCA_017916335.1
 taxon_id: 2249476
 species: Leishmania orientalis
 strain: LSCM4
+country: Thailand
+geo_loc_name: 'Thailand: Nan'
 assembly_name: LU_Lori_1.0
 assembly_level: Chromosome
 release_date: '2021-04-15'

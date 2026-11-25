@@ -4,6 +4,8 @@ accession: GCA_003067545.1
 taxon_id: 5666
 species: Leishmania tropica
 strain: MHOM/LB /2017/IK
+country: Lebanon
+geo_loc_name: Lebanon
 assembly_name: MHOM_LB _2017_IK
 assembly_level: Scaffold
 release_date: '2018-04-23'

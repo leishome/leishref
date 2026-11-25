@@ -4,6 +4,8 @@ accession: GCA_005317125.1
 taxon_id: 5659
 species: Leishmania amazonensis
 strain: UA301
+country: Colombia
+geo_loc_name: Colombia
 assembly_name: ASM531712v1
 assembly_level: Complete Genome
 release_date: '2019-05-14'

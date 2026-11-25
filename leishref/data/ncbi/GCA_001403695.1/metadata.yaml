@@ -3,6 +3,8 @@ source: NCBI
 accession: GCA_001403695.1
 taxon_id: 5681
 species: Leishmania peruviana
+country: Peru
+geo_loc_name: Peru
 assembly_name: Leishmania peruviana LEM-1537_V1
 assembly_level: Chromosome
 release_date: '2015-09-17'

@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5659
 species: Leishmania amazonensis
 strain: PH8
+country: Brazil
 assembly_level: Chromosome
 release_date: '2022-10-14'
 files:

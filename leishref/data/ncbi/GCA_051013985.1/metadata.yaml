@@ -4,6 +4,8 @@ accession: GCA_051013985.1
 taxon_id: 5664
 species: Leishmania major
 strain: RS-01
+country: Pakistan
+geo_loc_name: Pakistan
 assembly_name: ASM5101398v1
 assembly_level: Chromosome
 release_date: '2025-06-20'

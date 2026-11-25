@@ -4,6 +4,7 @@ accession: GCA_001989975.1
 taxon_id: 5661
 species: Leishmania donovani
 strain: MHOM/IN/1983/AG83
+country: India
 assembly_name: ASM198997v1
 assembly_level: Chromosome
 release_date: '2017-02-07'

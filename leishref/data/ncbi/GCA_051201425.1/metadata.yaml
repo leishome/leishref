@@ -4,6 +4,8 @@ accession: GCA_051201425.1
 taxon_id: 5678
 species: Leishmania naiffi
 strain: MDAS/BR/1979/M5533
+country: Brazil
+geo_loc_name: Brazil
 assembly_name: ASM5120142v1
 assembly_level: Contig
 release_date: '2025-07-03'

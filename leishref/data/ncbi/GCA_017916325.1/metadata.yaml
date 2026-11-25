@@ -4,6 +4,8 @@ accession: GCA_017916325.1
 taxon_id: 1580590
 species: Leishmania martiniquensis
 strain: LSCM1
+country: Thailand
+geo_loc_name: 'Thailand: Lamphun'
 assembly_name: LU_Lmar_1.0
 assembly_level: Chromosome
 release_date: '2021-04-15'

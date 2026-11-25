@@ -4,6 +4,8 @@ accession: GCA_058218815.1
 taxon_id: 5677
 species: Leishmania lainsoni
 strain: MHOM/BR/1981/M6426
+country: Brazil
+geo_loc_name: 'Brazil: Para state'
 assembly_name: ASM5821881v1
 assembly_level: Contig
 release_date: '2026-06-16'

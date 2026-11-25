@@ -4,6 +4,8 @@ accession: GCA_009770625.1
 taxon_id: 5689
 species: Leishmania tarentolae
 strain: Parrot-TarII
+country: Algeria
+geo_loc_name: Algeria
 assembly_name: UL_Ltar_1.0
 assembly_level: Contig
 release_date: '2019-12-20'

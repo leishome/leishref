@@ -128,6 +128,25 @@ def strain_from_organism(organism_name) -> str:
     return organism_name[len(species) :].strip()
 
 
+#: BioSample values that mean "no location recorded" (INSDC missing-value terms).
+NO_LOCATION = ("", "missing", "not applicable", "not collected", "not provided", "unknown", "na", "n/a")
+
+
+def country_from_geo_loc_name(geo_loc_name) -> Optional[str]:
+    """The country of a BioSample ``geo_loc_name`` ("Brazil: Para state" -> "Brazil"), or None."""
+    country = (geo_loc_name or "").split(":")[0].strip()
+    return None if country.lower() in NO_LOCATION else country
+
+
+def geo_loc_name_from_biosample(biosample: dict) -> Optional[str]:
+    """The ``geo_loc_name`` attribute of a ``datasets`` biosample record, if it holds a real place."""
+    for attribute in (biosample or {}).get("attributes") or []:
+        if attribute.get("name") == "geo_loc_name":
+            value = (attribute.get("value") or "").strip()
+            return value if country_from_geo_loc_name(value) else None
+    return None
+
+
 def _parse_summary(data: dict) -> dict:
     """Pull the fields we keep out of one `datasets summary` record."""
     info = data.get("assembly_info", {})
@@ -153,6 +172,7 @@ def _parse_summary(data: dict) -> dict:
         "sequencing_technology": info.get("sequencing_tech"),
         "bioproject": info.get("bioproject_accession"),
         "biosample": (info.get("biosample") or {}).get("accession"),
+        "geo_loc_name": geo_loc_name_from_biosample(info.get("biosample")),
         "stats": stats_from_summary(data.get("assembly_stats") or {}),
     }
 

@@ -4,6 +4,8 @@ accession: GCA_048773145.2
 taxon_id: 5666
 species: Leishmania tropica
 strain: NUMS 24
+country: Pakistan
+geo_loc_name: Pakistan
 assembly_name: ASM4877314v2
 assembly_level: Contig
 release_date: '2025-09-22'

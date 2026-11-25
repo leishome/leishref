@@ -4,6 +4,8 @@ accession: GCA_040363635.1
 taxon_id: 5678
 species: Leishmania naiffi
 strain: MDAS/BR/1979/M5533
+country: Brazil
+geo_loc_name: 'Brazil: Monte Dourado, Para'
 assembly_name: ASM4036363v1
 assembly_level: Chromosome
 release_date: '2024-07-01'

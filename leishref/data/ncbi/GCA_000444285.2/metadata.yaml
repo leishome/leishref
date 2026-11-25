@@ -4,6 +4,8 @@ accession: GCA_000444285.2
 taxon_id: 1206056
 species: Leishmania aethiopica
 strain: L147
+country: Ethiopia
+geo_loc_name: 'Ethiopia: Wollega Province, near Nekempti'
 assembly_name: Leishmania_aethiopica-L147-2.0.3
 assembly_level: Chromosome
 release_date: '2016-09-30'

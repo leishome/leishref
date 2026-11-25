@@ -4,6 +4,8 @@ accession: GCA_018290745.1
 taxon_id: 44271
 species: Leishmania chagasi
 strain: MHOM/HD/2017/M32502/Amapala
+country: Honduras
+geo_loc_name: Honduras
 assembly_name: IEC_LinfHon_2
 assembly_level: Contig
 release_date: '2021-05-06'

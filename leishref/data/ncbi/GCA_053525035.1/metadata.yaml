@@ -4,6 +4,8 @@ accession: GCA_053525035.1
 taxon_id: 5689
 species: Leishmania tarentolae
 strain: T33
+country: Italy
+geo_loc_name: 'Italy: Valenzano, Bari'
 assembly_name: ASM5352503v1
 assembly_level: Contig
 release_date: '2025-11-18'

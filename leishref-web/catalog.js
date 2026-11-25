@@ -1,4 +1,4 @@
-import { catalogStats, classifyTech, esc, hay, installCmd, kb, mb } from "./catalog-lib.js";
+import { catalogStats, countryPoints, classifyTech, esc, hay, installCmd, kb, mb } from "./catalog-lib.js";
 
 const $ = (s) => document.querySelector(s);
 
@@ -8,7 +8,7 @@ function details(g) {
   const rows = [];
   const add = (k, v) => v !== undefined && v !== null && v !== "" && rows.push([k, v]);
   const st = g.stats || {}, pv = g.provenance || {};
-  add("accession", g.accession); add("taxon id", g.taxon_id); add("assembly", g.assembly_name);
+  add("accession", g.accession); add("taxon id", g.taxon_id); add("origin", g.geo_loc_name || g.country); add("assembly", g.assembly_name);
   add("released", g.release_date); add("added", g.date_added);
   add("contigs", st.num_contigs); add("scaffolds", st.num_scaffolds); add("contig N50", st.contig_n50 && kb(st.contig_n50));
   add("gaps", st.num_gaps); add("ambiguous bases", st.num_ambiguous);
@@ -162,6 +162,20 @@ function scatter(el) {
   box.addEventListener("click", () => el.dataset.cur && search(el.dataset.cur));
 }
 
+function worldMap(el, world) {
+  const { points, unmapped } = countryPoints(genomes, world.centroids);
+  const r = (n) => 4 + 3.2 * Math.sqrt(n);
+  const tipOf = (p) => `<b>${esc(p.country)}</b>: ${p.count} genome${p.count > 1 ? "s" : ""}<br>` +
+    Object.entries(p.species).sort((a, b) => b[1] - a[1]).map(([s, n]) => `${esc(s)} (${n})`).join("<br>");
+  el.innerHTML = `<svg viewBox="0 0 ${world.w} ${world.h}" role="img" aria-label="World map of genome origins"><path class="land" d="${world.land}"/>` +
+    // big bubbles first so that small ones stay clickable on top
+    points.map((p) => `<circle class="pt" tabindex="0" cx="${p.x}" cy="${p.y}" r="${r(p.count).toFixed(1)}" data-q="${esc(p.country)}" data-tip="${esc(tipOf(p))}"/>`).join("") + `</svg>` +
+    (unmapped.length ? `<p class="note">Not placed on the map: ${unmapped.map(([c, n]) => `${esc(c)} (${n})`).join(", ")}.</p>` : "");
+  el.onclick = (e) => { const c = e.target.closest(".pt"); if (c) search(c.dataset.q); };
+  const located = points.reduce((a, p) => a + p.count, 0) + unmapped.reduce((a, u) => a + u[1], 0);
+  $("#map-count").textContent = `${located} of ${genomes.length} genomes have a recorded origin.`;
+}
+
 function charts() {
   const sp = count("species");
   const top = sp.slice(0, 12), rest = sp.slice(12).reduce((a, s) => a + s.value, 0);
@@ -170,6 +184,8 @@ function charts() {
   barChart($("#c-tech"), count("techCat"), { w: 460, label: 150, q: (i) => (i.label === "Unknown" ? "" : i.label) });
   barChart($("#c-level"), count("assembly_level"), { w: 460, label: 110, q: (i) => i.label });
   scatter($("#c-scatter"));
+  fetch("world.json").then((r) => r.json()).then((w) => worldMap($("#c-map"), w))
+    .catch(() => { $("#c-map").textContent = "Could not load world.json."; });
 }
 
 fetch("catalog.json").then((r) => r.json()).then((data) => {

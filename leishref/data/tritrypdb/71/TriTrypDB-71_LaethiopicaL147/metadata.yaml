@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5667
 species: Leishmania aethiopica
 strain: L147
+country: Ethiopia
 assembly_level: Chromosome
 release_date: '2016-09-27'
 files:

@@ -4,6 +4,8 @@ accession: GCA_000755165.2
 taxon_id: 5679
 species: Leishmania panamensis
 strain: MHOM/PA/94/PSC-1
+country: Panama
+geo_loc_name: Panama
 assembly_name: ASM75516v2
 assembly_level: Complete Genome
 release_date: '2025-06-09'

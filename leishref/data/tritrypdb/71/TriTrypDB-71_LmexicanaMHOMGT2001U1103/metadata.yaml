@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5665
 species: Leishmania mexicana
 strain: MHOM/GT/2001/U1103
+country: Guatemala
 assembly_level: Chromosome
 release_date: '2016-05-28'
 files:

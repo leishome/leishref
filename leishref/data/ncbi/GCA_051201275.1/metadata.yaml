@@ -4,6 +4,8 @@ accession: GCA_051201275.1
 taxon_id: 5670
 species: Leishmania guyanensis
 strain: MHOM/BR/75/M4147
+country: Brazil
+geo_loc_name: Brazil
 assembly_name: ASM5120127v1
 assembly_level: Contig
 release_date: '2025-07-03'

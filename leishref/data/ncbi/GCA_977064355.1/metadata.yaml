@@ -4,6 +4,8 @@ accession: GCA_977064355.1
 taxon_id: 5689
 species: Leishmania tarentolae
 strain: T33
+country: Italy
+geo_loc_name: Italy
 assembly_name: Leishmania_tarentolae_T33_Italy_2024
 assembly_level: Scaffold
 release_date: '2025-11-20'

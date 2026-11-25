@@ -4,6 +4,8 @@ accession: GCA_024505685.1
 taxon_id: 5660
 species: Leishmania braziliensis
 strain: BA788
+country: Brazil
+geo_loc_name: Brazil
 assembly_name: BA788
 assembly_level: Chromosome
 release_date: '2022-08-02'

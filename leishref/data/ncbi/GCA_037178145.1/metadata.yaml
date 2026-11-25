@@ -4,6 +4,8 @@ accession: GCA_037178145.1
 taxon_id: 5671
 species: Leishmania infantum
 strain: MHOM/TN/80/IPT-1 (ATCC 50134D)
+country: Tunisia
+geo_loc_name: 'Tunisia: Monastir'
 assembly_name: ASM3717814v1
 assembly_level: Contig
 release_date: '2024-03-15'

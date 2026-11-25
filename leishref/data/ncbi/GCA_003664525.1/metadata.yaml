@@ -4,6 +4,8 @@ accession: GCA_003664525.1
 taxon_id: 5670
 species: Leishmania guyanensis
 strain: 204-365
+country: French Guiana
+geo_loc_name: French Guiana
 assembly_name: ASM366452v1
 assembly_level: Contig
 release_date: '2018-10-16'

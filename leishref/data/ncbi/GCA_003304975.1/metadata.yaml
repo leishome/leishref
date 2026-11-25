@@ -4,6 +4,8 @@ accession: GCA_003304975.1
 taxon_id: 5660
 species: Leishmania braziliensis
 strain: IOC-L 3564
+country: Brazil
+geo_loc_name: 'Brazil: Rondonia'
 assembly_name: IOC-L_3564
 assembly_level: Chromosome
 release_date: '2018-07-11'
