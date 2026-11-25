@@ -4,6 +4,8 @@ accession: GCA_018291365.1
 taxon_id: 44271
 species: Leishmania chagasi
 strain: MCER/BR/1981/M6445/Salvaterra
+country: Brazil
+geo_loc_name: Brazil
 assembly_name: IEC_LinfBR_2
 assembly_level: Contig
 release_date: '2021-05-06'

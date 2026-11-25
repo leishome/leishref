@@ -63,3 +63,16 @@ test("catalogStats of an empty catalog is all zeros", () => {
   assert.equal(st.genomes, 0);
   assert.deepEqual(st.origins, [["NCBI", 0], ["TriTrypDB", 0], ["others", 0]]);
 });
+
+test("countryPoints counts genomes per country, maps USA, and reports places the map lacks", async () => {
+  const { countryPoints } = await import("../catalog-lib.js");
+  const centroids = { Brazil: [10, 20], "United States of America": [1, 2] };
+  const g = [
+    { country: "Brazil", species: "L. a" }, { country: "Brazil", species: "L. a" }, { country: "Brazil", species: "L. b" },
+    { country: "USA", species: "L. a" }, { country: "USSR", species: "L. a" }, { species: "L. a" },
+  ];
+  const { points, unmapped } = countryPoints(g, centroids);
+  assert.deepEqual(points.map((p) => [p.country, p.count, p.x, p.y]), [["Brazil", 3, 10, 20], ["USA", 1, 1, 2]]);
+  assert.deepEqual(points[0].species, { "L. a": 2, "L. b": 1 });
+  assert.deepEqual(unmapped, [["USSR", 1]]);
+});

@@ -4,6 +4,8 @@ accession: GCA_964014045.1
 taxon_id: 420245
 species: Leishmania braziliensis
 strain: M2904
+country: Brazil
+geo_loc_name: Brazil
 assembly_name: Leishmania_braziliensis_M2904-Dec2022
 assembly_level: Scaffold
 release_date: '2024-03-20'

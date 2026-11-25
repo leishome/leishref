@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5663
 species: Leishmania enriettii
 strain: MCAV/BR/2001/CUR178
+country: Brazil
 assembly_level: Chromosome
 release_date: '2021-04-15'
 files:

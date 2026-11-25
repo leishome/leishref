@@ -63,6 +63,10 @@ class Genome:
     taxon_id: Optional[int] = None
     species: Optional[str] = None
     strain: Optional[str] = None
+    #: Where the isolate was collected: the BioSample ``geo_loc_name`` as recorded
+    #: ("Brazil: Para state") and its country part ("Brazil"), which the website maps.
+    country: Optional[str] = None
+    geo_loc_name: Optional[str] = None
     assembly_name: Optional[str] = None
     assembly_level: Optional[str] = None
     #: What kind of sequence this entry is, when it isn't a nuclear assembly - e.g.
@@ -126,6 +130,8 @@ class Genome:
             str(self.taxon_id) if self.taxon_id else None,
             self.species,
             self.strain,
+            self.country,
+            self.geo_loc_name,
             self.assembly_name,
             self.molecule_type,
             self.release_version,
@@ -155,6 +161,8 @@ class Genome:
             "taxon_id": self.taxon_id,
             "species": self.species,
             "strain": self.strain,
+            "country": self.country,
+            "geo_loc_name": self.geo_loc_name,
             "assembly_name": self.assembly_name,
             "assembly_level": self.assembly_level,
             "molecule_type": self.molecule_type,

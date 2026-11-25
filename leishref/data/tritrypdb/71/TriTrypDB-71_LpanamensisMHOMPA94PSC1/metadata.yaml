@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5679
 species: Leishmania panamensis
 strain: MHOM/PA/94/PSC-1
+country: Panama
 assembly_level: Chromosome
 release_date: '2015-03-05'
 files:

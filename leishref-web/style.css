@@ -65,3 +65,7 @@ footer { max-width: 960px; margin: 0 auto; padding: 1rem 1.5rem; border-top: 1px
 #c-scatter svg { cursor: crosshair; }
 #tip { position: fixed; pointer-events: none; background: var(--text); color: var(--bg); padding: 5px 9px; border-radius: 6px; font-size: 12px; opacity: 0; transition: opacity .1s; z-index: 9; max-width: 260px; }
 .logo img { height: 64px; width: 64px; display: block; border-radius: 10px; }
+.chart .land { fill: var(--line); stroke: var(--card); stroke-width: .4; }
+.chart .pt { fill: var(--accent); fill-opacity: .6; stroke: var(--accent); stroke-width: 1; cursor: pointer; outline: none; }
+.chart .pt:hover, .chart .pt:focus { fill-opacity: .85; stroke: var(--text); }
+.chart .note { margin: 8px 0 0; font-size: 12px; color: var(--muted); }

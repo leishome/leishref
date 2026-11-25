@@ -4,6 +4,8 @@ accession: GCA_023158965.1
 taxon_id: 1580590
 species: Leishmania martiniquensis
 strain: PCM3.1
+country: Thailand
+geo_loc_name: Thailand
 assembly_name: ASM2315896v1
 assembly_level: Scaffold
 release_date: '2022-04-27'

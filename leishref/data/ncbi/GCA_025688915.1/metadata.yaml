@@ -4,6 +4,8 @@ accession: GCA_025688915.1
 taxon_id: 5659
 species: Leishmania amazonensis
 strain: PH8
+country: Brazil
+geo_loc_name: Brazil:Belem
 assembly_name: ASM2568891v1
 assembly_level: Chromosome
 release_date: '2022-10-18'

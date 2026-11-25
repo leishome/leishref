@@ -4,6 +4,8 @@ accession: GCA_044509535.1
 taxon_id: 5660
 species: Leishmania braziliensis
 strain: MHOM/CO/2013/UN0036
+country: Colombia
+geo_loc_name: Colombia
 assembly_name: UN0036
 assembly_level: Chromosome
 release_date: '2024-12-12'

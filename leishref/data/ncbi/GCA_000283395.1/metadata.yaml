@@ -4,6 +4,8 @@ accession: GCA_000283395.1
 taxon_id: 1215323
 species: Leishmania donovani
 strain: Ld 2001
+country: India
+geo_loc_name: 'India: Balia, Uttar Pradesh'
 assembly_name: ASM28339v1
 assembly_level: Contig
 release_date: '2012-08-06'

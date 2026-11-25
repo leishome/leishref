@@ -13,7 +13,7 @@ export function classifyTech(s) {
 }
 
 export const hay = (g) =>
-  [g.identifier, g.accession, g.species, g.strain, g.source, g.assembly_level, g.taxon_id, g.notes, g.tech, g.techCat, ...(g.aliases || [])]
+  [g.identifier, g.accession, g.species, g.strain, g.country, g.geo_loc_name, g.source, g.assembly_level, g.taxon_id, g.notes, g.tech, g.techCat, ...(g.aliases || [])]
     .join(" ").toLowerCase();
 
 export function installCmd(g) {
@@ -33,4 +33,27 @@ export function catalogStats(genomes) {
     chromosomeLevel: genomes.filter((g) => ["Complete Genome", "Chromosome"].includes(g.assembly_level)).length,
     origins,
   };
+}
+
+// Catalog country names that differ from the map's (Natural Earth) names.
+const MAP_NAMES = { USA: "United States of America" };
+
+// One bubble per country on the world map. `centroids` maps a map country name to [x, y]; countries
+// the map cannot place (e.g. "USSR", a state that no longer exists) are returned in `unmapped`.
+export function countryPoints(genomes, centroids) {
+  const by = {};
+  genomes.forEach((g) => {
+    if (!g.country) return;
+    (by[g.country] ??= { country: g.country, count: 0, species: {} }).count++;
+    const sp = g.species || "unknown species";
+    by[g.country].species[sp] = (by[g.country].species[sp] || 0) + 1;
+  });
+  const points = [], unmapped = [];
+  Object.values(by).forEach((c) => {
+    const xy = centroids[MAP_NAMES[c.country] || c.country];
+    if (xy) points.push({ ...c, x: xy[0], y: xy[1] });
+    else unmapped.push([c.country, c.count]);
+  });
+  const byCount = (a, b) => b.count - a.count || a.country.localeCompare(b.country);
+  return { points: points.sort(byCount), unmapped: unmapped.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])) };
 }

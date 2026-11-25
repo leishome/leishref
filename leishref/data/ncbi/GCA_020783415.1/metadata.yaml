@@ -4,6 +4,8 @@ accession: GCA_020783415.1
 taxon_id: 5664
 species: Leishmania major
 strain: JRCGR_LM-01
+country: Pakistan
+geo_loc_name: Pakistan:Karachi
 assembly_name: ASM2078341v1
 assembly_level: Chromosome
 release_date: '2021-11-07'

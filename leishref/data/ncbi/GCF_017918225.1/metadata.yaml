@@ -4,6 +4,8 @@ accession: GCF_017918225.1
 taxon_id: 2802991
 species: Leishmania sp. Namibia
 strain: '253'
+country: Namibia
+geo_loc_name: 'Namibia: Keetmanshoop'
 assembly_name: LU_LNam_1.0
 assembly_level: Chromosome
 release_date: '2021-04-15'

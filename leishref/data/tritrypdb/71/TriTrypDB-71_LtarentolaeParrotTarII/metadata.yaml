@@ -3,6 +3,7 @@ source: TriTrypDB
 taxon_id: 5689
 species: Leishmania tarentolae
 strain: Parrot-TarII
+country: Algeria
 assembly_level: Chromosome
 release_date: '2011-06-22'
 files:

@@ -4,6 +4,8 @@ accession: GCA_037178175.1
 taxon_id: 5671
 species: Leishmania infantum
 strain: MCAN/IL/2011/NT6
+country: Israel
+geo_loc_name: Israel
 assembly_name: ASM3717817v1
 assembly_level: Contig
 release_date: '2024-03-15'

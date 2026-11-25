@@ -4,6 +4,8 @@ accession: GCA_037178395.1
 taxon_id: 5671
 species: Leishmania infantum
 strain: MHOM/ES/2022/LLM-2503
+country: Spain
+geo_loc_name: 'Spain: Madrid'
 assembly_name: ASM3717839v1
 assembly_level: Contig
 release_date: '2024-03-15'

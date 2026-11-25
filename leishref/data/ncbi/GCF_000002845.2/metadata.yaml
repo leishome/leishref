@@ -4,6 +4,7 @@ accession: GCF_000002845.2
 taxon_id: 420245
 species: Leishmania braziliensis
 strain: MHOM/BR/75/M2904
+country: Brazil
 assembly_name: ASM284v2
 assembly_level: Chromosome
 release_date: '2011-11-07'

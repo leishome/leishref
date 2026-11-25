@@ -4,6 +4,8 @@ accession: GCA_000981925.2
 taxon_id: 1638716
 species: Leishmania sp. AIIMS/LM/SS/PKDL/LD-974
 strain: AIIMS/LM/SS/PKDL/LD-974
+country: India
+geo_loc_name: 'India: Bihar'
 assembly_name: Ld_v2
 assembly_level: Contig
 release_date: '2015-06-10'

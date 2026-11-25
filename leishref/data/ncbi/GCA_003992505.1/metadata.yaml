@@ -4,6 +4,8 @@ accession: GCA_003992505.1
 taxon_id: 5659
 species: Leishmania amazonensis
 strain: 210-660
+country: French Guiana
+geo_loc_name: French Guiana
 assembly_name: ASM399250v1
 assembly_level: Contig
 release_date: '2019-01-04'

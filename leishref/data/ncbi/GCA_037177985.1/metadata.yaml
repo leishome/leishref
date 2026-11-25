@@ -4,6 +4,8 @@ accession: GCA_037177985.1
 taxon_id: 5671
 species: Leishmania infantum
 strain: N1HROMA4
+country: Italy
+geo_loc_name: Italy
 assembly_name: ASM3717798v1
 assembly_level: Contig
 release_date: '2024-03-15'

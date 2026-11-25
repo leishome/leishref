@@ -3,6 +3,8 @@ source: NCBI
 accession: GCA_000438535.1
 taxon_id: 5659
 species: Leishmania amazonensis
+country: Brazil
+geo_loc_name: 'Brazil: Para, Cafezal City'
 assembly_name: LeiAma1.0
 assembly_level: Scaffold
 release_date: '2013-07-18'

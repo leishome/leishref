@@ -4,6 +4,8 @@ accession: GCA_003992435.2
 taxon_id: 5665
 species: Leishmania mexicana
 strain: 215-49
+country: USA
+geo_loc_name: USA
 assembly_name: ASM399243v2
 assembly_level: Chromosome
 release_date: '2025-08-12'
